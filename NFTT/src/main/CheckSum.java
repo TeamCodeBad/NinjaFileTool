@@ -41,10 +41,6 @@ public class CheckSum {
 		BigInteger piece1;
 		BigInteger piece2;
 		BigInteger temp = new BigInteger("0");
-
-		String order = (new BigInteger(""+(array[0] % 8))).toString(8);
-		int modthing = order.length();
-
 		
 		byte[] orderArray = new byte[8];
 		for(int i = 0; i < 8; i++){
