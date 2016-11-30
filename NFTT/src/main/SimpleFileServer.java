@@ -37,10 +37,10 @@ public class SimpleFileServer {
 		int filesCount = dis.readInt();
 		File[] files = new File[filesCount];
 		
-		String test;
+		int test;
 		for(int i = 0; i < filesCount; i++)
 		{
-			test = dis.readUTF();
+			test = dis.readInt();
 			long fileLength = dis.readLong();
 			fileName = dis.readUTF();
 			files[i] = new File(dirPath + "/" + fileName);

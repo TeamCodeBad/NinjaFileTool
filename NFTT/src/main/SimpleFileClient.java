@@ -55,11 +55,12 @@ public class SimpleFileClient {
 		DataOutputStream dos = new DataOutputStream(bos);
 
 		dos.writeInt(files.length);
+		dos.flush();
 		boolean doOnce = willScramble;
 
 		//for(File file : files)
 		for (int i = 0; i < files.length; i++){
-			dos.writeUTF("hello");
+			dos.writeInt(i);
 			dos.flush();
 			long length = files[i].length();
 			dos.writeLong(length);

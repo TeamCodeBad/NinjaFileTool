@@ -127,6 +127,7 @@ public class CheckSum {
 			count = (count + 1) % 8;
 
 			//temp = temp.mod(new BigInteger("1298074214633706835075030044377087"));
+
 		}
 
 		temp = temp.mod(new BigInteger("1298074214633706835075030044377087"));
