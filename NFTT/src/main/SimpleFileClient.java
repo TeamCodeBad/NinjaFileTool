@@ -50,25 +50,15 @@ public class SimpleFileClient {
 	public void send(File[] files, boolean willScramble) throws IOException{
 
 		Socket socket = new Socket(this.address, this.port);
-		OutputStream os = socket.getOutputStream();
-		BufferedOutputStream bos = new BufferedOutputStream(os);
+
+		BufferedOutputStream bos = new BufferedOutputStream(socket.getOutputStream());
 		DataOutputStream dos = new DataOutputStream(bos);
-//		OutputStreamWriter osw = new OutputStreamWriter(os);
-//		BufferedWriter bw = new BufferedWriter(osw);
-//		boolean statement = true;
 
 		dos.writeInt(files.length);
-		dos.flush();
 		boolean doOnce = willScramble;
 
 		//for(File file : files)
 		for (int i = 0; i < files.length; i++){
-//			while(statement){
-//				bw.write(i);
-//				bw.flush();
-//				statement = false;
-//			}
-//			statement = true;
 			long length = files[i].length();
 			dos.writeLong(length);
 
@@ -107,9 +97,10 @@ public class SimpleFileClient {
 		System.out.println("Which test case? Enter 1-3 ONLY. \n1. Success\n2. Some failure but sent\n3. Complete Failure");
 		String input = g.nextLine();
 		choices(listOfFiles, input);
-		
 		deleteFiles(listOfFiles);
+		
 	}
+	
 
 	private void deleteFiles(File[] listOfFiles) {
 		for(File f: listOfFiles){
