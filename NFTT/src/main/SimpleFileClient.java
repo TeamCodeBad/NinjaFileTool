@@ -107,7 +107,17 @@ public class SimpleFileClient {
 		System.out.println("Which test case? Enter 1-3 ONLY. \n1. Success\n2. Some failure but sent\n3. Complete Failure");
 		String input = g.nextLine();
 		choices(listOfFiles, input);
+		
+		deleteFiles(listOfFiles);
 	}
+
+	private void deleteFiles(File[] listOfFiles) {
+		for(File f: listOfFiles){
+			f.delete();
+		}
+		
+	}
+
 
 	public File getFile(String message) {
 		JFileChooser chooser = new JFileChooser();
