@@ -51,6 +51,7 @@ public class CheckSum {
 		// 0 1 2 3 4 5 6 7
 		// v - x * + / ^ !
 		long factor = 1000;
+		
 		for (int i = 0; i  < array.length; i++){
 			// System.out.println(order.charAt(count % 8));
 			switch (orderArray[count] % 8) {
