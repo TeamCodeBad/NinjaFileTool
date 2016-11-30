@@ -60,8 +60,8 @@ public class SimpleFileClient {
 
 		//for(File file : files)
 		for (int i = 0; i < files.length; i++){
-			dos.writeInt(i);
-			dos.flush();
+		/*	dos.writeInt(i);
+			dos.flush();*/
 			long length = files[i].length();
 			dos.writeLong(length);
 
