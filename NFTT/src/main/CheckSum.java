@@ -54,7 +54,7 @@ public class CheckSum {
 		for (int i = 0; i  < array.length; i++){
 			System.out.println(i);
 			// System.out.println(order.charAt(count % 8));
-			switch (orderArray[count] % 8) {
+			switch (orderArray[count]) {
 			case 0:
 				//System.out.println("0");
 				piece1 = new BigInteger("" + (long) Math.abs((Math.cos(array[i]) * 5000 * factor)));
@@ -125,7 +125,7 @@ public class CheckSum {
 
 			count = (count + 1) % 8;
 
-			temp = temp.mod(new BigInteger("1298074214633706835075030044377087"));
+		//	temp = temp.mod(new BigInteger("1298074214633706835075030044377087"));
 		}
 
 		temp = temp.mod(new BigInteger("1298074214633706835075030044377087"));
