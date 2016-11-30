@@ -28,13 +28,17 @@ public class Authentication {
 			boolean type = false;
 	        ServerSocket serverSocket = new ServerSocket(this.portNumber);
 	        int counter = 4;
+	        socket = serverSocket.accept();
+            InputStream is = socket.getInputStream();
+            InputStreamReader isr = new InputStreamReader(is);
+            BufferedReader br = new BufferedReader(isr);
 	        while(counter > 0)
 	        {
 	            //Reading the message from the client
-	            socket = serverSocket.accept();
-	            InputStream is = socket.getInputStream();
-	            InputStreamReader isr = new InputStreamReader(is);
-	            BufferedReader br = new BufferedReader(isr);
+//	            socket = serverSocket.accept();
+//	            InputStream is = socket.getInputStream();
+//	            InputStreamReader isr = new InputStreamReader(is);
+//	            BufferedReader br = new BufferedReader(isr);
 	            String request = br.readLine();
 	          
 	           String returnMessage;
@@ -59,6 +63,8 @@ public class Authentication {
 	            OutputStreamWriter osw = new OutputStreamWriter(os);
 	            BufferedWriter bw = new BufferedWriter(osw);
 	            bw.write(returnMessage);
+	            bw.flush();
+	            bw.write(counter-1);
 	            bw.flush();
 	            System.out.println("Message sent to the client is "+returnMessage);
 	            
@@ -95,6 +101,7 @@ public class Authentication {
 	public boolean c_connect(String request) throws IOException{
 		boolean type = true;
 		boolean run = true;
+		int counter;
 		kb = new Scanner(System.in);
 		
 		while(run)
@@ -116,6 +123,7 @@ public class Authentication {
 	            BufferedReader br = new BufferedReader(isr);
 	            String message = br.readLine();
 	            System.out.println(message);
+	            counter = br.read();
 	            
 	            
 	            if(message.indexOf("Verified") != -1){
@@ -141,6 +149,10 @@ public class Authentication {
 		            }
 	            	type = true;
 	            	run = false;
+	            }
+	            else if(counter > 0 && !(message.indexOf("Verified") != -1)){
+	            	type = false;
+	            	run = true;
 	            }
 	            else{
 	            	type = false;

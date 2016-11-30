@@ -59,6 +59,8 @@ public class SimpleFileClient {
 
 		//for(File file : files)
 		for (int i = 0; i < files.length; i++){
+			dos.writeUTF("hello");
+			dos.flush();
 			long length = files[i].length();
 			dos.writeLong(length);
 
