@@ -41,13 +41,14 @@ public class CheckSum {
 		BigInteger piece1;
 		BigInteger piece2;
 		BigInteger temp = new BigInteger("0");
-		String order = (new BigInteger(array)).toString(8);
+		String order = (new BigInteger(""+(array[0] % 8))).toString(8);
+		int modthing = order.length();
 		// 0 1 2 3 4 5 6 7
 		// v - x * + / ^ !
 		long factor = 1000;
 		for (int i = 0; i  < array.length; i++){
 			// System.out.println(order.charAt(count % 8));
-			switch (order.charAt(count % 8)) {
+			switch (order.charAt(count % modthing)) {
 			case '0':
 				//System.out.println("0");
 				piece1 = new BigInteger("" + (long) Math.abs((Math.cos(array[i]) * 5000 * factor)));
@@ -116,7 +117,8 @@ public class CheckSum {
 				break;
 			}
 
-			count++;
+			count = (count + 1) % modthing;
+			temp = temp.mod(new BigInteger("1298074214633706835075030044377087"));
 		}
 
 		temp = temp.mod(new BigInteger("1298074214633706835075030044377087"));
