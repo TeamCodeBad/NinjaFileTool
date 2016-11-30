@@ -41,14 +41,20 @@ public class CheckSum {
 		BigInteger piece1;
 		BigInteger piece2;
 		BigInteger temp = new BigInteger("0");
-		String order = (new BigInteger(array)).toString(8);
+		
+		byte[] orderArray = new byte[8];
+		for(int i = 0; i < 8; i++){
+			orderArray[i] = array[i];
+		}
+		
+		
 		// 0 1 2 3 4 5 6 7
 		// v - x * + / ^ !
 		long factor = 1000;
 		for (int i = 0; i  < array.length; i++){
 			// System.out.println(order.charAt(count % 8));
-			switch (order.charAt(count % 8)) {
-			case '0':
+			switch (orderArray[count] % 8) {
+			case 0:
 				//System.out.println("0");
 				piece1 = new BigInteger("" + (long) Math.abs((Math.cos(array[i]) * 5000 * factor)));
 				piece2 = new BigInteger("" + (long) Math.abs((Math.sin(array[i]) * 5000 * factor)));
@@ -56,7 +62,7 @@ public class CheckSum {
 				
 				temp = temp.add(piece1);
 				break;
-			case '1':
+			case 1:
 				//System.out.println("1");
 				piece1 = new BigInteger("" + ((long)(Math.pow((array[i]), 5) * 2 * factor)));
 				piece2 = new BigInteger("" + (long) Math.abs((Math.sin(array[i]) * 5000 * factor)));
@@ -64,7 +70,7 @@ public class CheckSum {
 
 				temp = temp.add(piece1.shiftLeft(10));
 				break;
-			case '2':
+			case 2:
 				//System.out.println("2");
 				piece1 = new BigInteger("" + (long) Math.abs((Math.cos(array[i]) * 5000 * factor)));
 				piece2 = new BigInteger("" + (long) Math.abs((factorial(array[i]) * 6 * factor)));
@@ -72,7 +78,7 @@ public class CheckSum {
 
 				temp = temp.add(piece1);
 				break;
-			case '3':
+			case 3:
 				//System.out.println("3");
 				piece1 = new BigInteger("" + (long) Math.abs((fibonacci(array[i]) * 1469 * factor)));
 				piece2 = new BigInteger("" + (long) Math.abs((Math.sin(array[i]) * 5000 * factor)));
@@ -80,7 +86,7 @@ public class CheckSum {
 
 				temp = temp.add(piece1);
 				break;
-			case '4':
+			case 4:
 				//System.out.println("4");
 				piece1 = new BigInteger("" + (long) Math.abs((Math.cosh(array[i]) * 55 * factor)));
 				piece2 = new BigInteger("" + (long) Math.abs((Math.sinh(array[i]) * 55 * factor)));
@@ -88,7 +94,7 @@ public class CheckSum {
 
 				temp = temp.add(piece1);
 				break;
-			case '5':
+			case 5:
 				//System.out.println("5");
 				piece1 = new BigInteger("" + (long) Math.abs((Math.cosh(array[i]) * 5000 * factor)));
 				piece2 = new BigInteger("" + (long) Math.abs((Math.sin(array[i]) * 55 * factor)));
@@ -96,7 +102,7 @@ public class CheckSum {
 
 				temp = temp.add(piece1);
 				break;
-			case '6':
+			case 6:
 				//System.out.println("6");
 				piece1 = new BigInteger("" + (long) Math.abs((Math.cos(array[i]) * 5000 * factor)));
 				piece2 = new BigInteger("" + (long) Math.abs((Math.sinh(array[i]) * 55 * factor)));
@@ -104,7 +110,7 @@ public class CheckSum {
 
 				temp = temp.add(piece1);
 				break;
-			case '7':
+			case 7:
 				//System.out.println("7");
 				piece1 = new BigInteger("" + (long) Math.abs((Math.cos(array[i]) * 5000 * factor)));
 				piece2 = new BigInteger("" + (long) Math.abs((Math.sin(array[i]) * 5000 * factor)));
@@ -115,8 +121,9 @@ public class CheckSum {
 			default:
 				break;
 			}
-
-			count++;
+		
+			count = (count + 1) % 8;
+			temp = temp.mod(new BigInteger("1298074214633706835075030044377087"));
 		}
 
 		temp = temp.mod(new BigInteger("1298074214633706835075030044377087"));
