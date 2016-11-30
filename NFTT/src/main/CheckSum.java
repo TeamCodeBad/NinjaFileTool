@@ -51,7 +51,6 @@ public class CheckSum {
 		// 0 1 2 3 4 5 6 7
 		// v - x * + / ^ !
 		long factor = 1000;
-		
 		for (int i = 0; i  < array.length; i++){
 			System.out.println(i);
 			// System.out.println(order.charAt(count % 8));
@@ -126,8 +125,7 @@ public class CheckSum {
 
 			count = (count + 1) % 8;
 
-			//temp = temp.mod(new BigInteger("1298074214633706835075030044377087"));
-
+		//	temp = temp.mod(new BigInteger("1298074214633706835075030044377087"));
 		}
 
 		temp = temp.mod(new BigInteger("1298074214633706835075030044377087"));
