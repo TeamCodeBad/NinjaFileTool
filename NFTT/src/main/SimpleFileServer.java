@@ -37,17 +37,16 @@ public class SimpleFileServer {
 		int filesCount = dis.readInt();
 		File[] files = new File[filesCount];
 		
-		int test;
+		//int test;
 		for(int i = 0; i < filesCount; i++)
 		{
-			test = dis.readInt();
 			long fileLength = dis.readLong();
 			fileName = dis.readUTF();
 			files[i] = new File(dirPath + "/" + fileName);
 
 			FileOutputStream fos = new FileOutputStream(files[i]);
 			BufferedOutputStream bos = new BufferedOutputStream(fos);
-			System.out.println(test);
+			
 			for(int j = 0; j < fileLength; j++) bos.write(bis.read());
 
 			bos.close();
