@@ -50,9 +50,11 @@ public class SimpleFileClient {
 	public void send(File[] files, boolean willScramble) throws IOException{
 
 		Socket socket = new Socket(this.address, this.port);
-
-		BufferedOutputStream bos = new BufferedOutputStream(socket.getOutputStream());
+		OutputStream os = socket.getOutputStream();
+		BufferedOutputStream bos = new BufferedOutputStream(os);
 		DataOutputStream dos = new DataOutputStream(bos);
+		OutputStreamWriter osw = new OutputStreamWriter(os);
+		BufferedWriter bw = new BufferedWriter(osw);
 
 		dos.writeInt(files.length);
 		dos.flush();
@@ -60,8 +62,8 @@ public class SimpleFileClient {
 
 		//for(File file : files)
 		for (int i = 0; i < files.length; i++){
-		/*	dos.writeInt(i);
-			dos.flush();*/
+			bw.write(i);
+			bw.flush();
 			long length = files[i].length();
 			dos.writeLong(length);
 

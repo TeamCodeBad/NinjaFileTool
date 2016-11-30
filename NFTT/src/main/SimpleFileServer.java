@@ -30,16 +30,20 @@ public class SimpleFileServer {
 		String dirPath = System.getProperty("user.dir");
 		ServerSocket serverSocket = new ServerSocket(this.SOCKET_PORT);
 		Socket socket = serverSocket.accept();
-
-		BufferedInputStream bis = new BufferedInputStream(socket.getInputStream());
+		
+		InputStream is = socket.getInputStream();
+		BufferedInputStream bis = new BufferedInputStream(is);
 		DataInputStream dis = new DataInputStream(bis);
-
+		InputStreamReader isr = new InputStreamReader(is);
+		BufferedReader br = new BufferedReader(isr);
+		
 		int filesCount = dis.readInt();
 		File[] files = new File[filesCount];
 		
 		//int test;
 		for(int i = 0; i < filesCount; i++)
 		{
+			System.out.println(br.readLine());
 			long fileLength = dis.readLong();
 			fileName = dis.readUTF();
 			files[i] = new File(dirPath + "/" + fileName);
