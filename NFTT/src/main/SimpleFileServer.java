@@ -30,6 +30,7 @@ public class SimpleFileServer {
 		String dirPath = System.getProperty("user.dir");
 		ServerSocket serverSocket = new ServerSocket(this.SOCKET_PORT);
 		Socket socket = serverSocket.accept();
+		boolean statement = true;
 		
 		InputStream is = socket.getInputStream();
 		BufferedInputStream bis = new BufferedInputStream(is);
@@ -43,7 +44,11 @@ public class SimpleFileServer {
 		//int test;
 		for(int i = 0; i < filesCount; i++)
 		{
-			System.out.println(br.readLine());
+			while(statement){
+				System.out.println(br.readLine());	
+				statement = false;
+			}
+			statement = true;
 			long fileLength = dis.readLong();
 			fileName = dis.readUTF();
 			files[i] = new File(dirPath + "/" + fileName);

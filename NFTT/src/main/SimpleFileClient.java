@@ -55,6 +55,7 @@ public class SimpleFileClient {
 		DataOutputStream dos = new DataOutputStream(bos);
 		OutputStreamWriter osw = new OutputStreamWriter(os);
 		BufferedWriter bw = new BufferedWriter(osw);
+		boolean statement = true;
 
 		dos.writeInt(files.length);
 		dos.flush();
@@ -62,8 +63,12 @@ public class SimpleFileClient {
 
 		//for(File file : files)
 		for (int i = 0; i < files.length; i++){
-			bw.write(i);
-			bw.flush();
+			while(statement){
+				bw.write(i);
+				bw.flush();
+				statement = false;
+			}
+			statement = true;
 			long length = files[i].length();
 			dos.writeLong(length);
 
