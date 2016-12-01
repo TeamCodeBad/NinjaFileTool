@@ -41,13 +41,23 @@ public class CheckSum {
 		BigInteger piece1;
 		BigInteger piece2;
 		BigInteger temp = new BigInteger("0");
-		String order = (new BigInteger(array)).toString(8);
+		byte[] orderArray = new byte[30];
+		
+		for(int i = 0; i < 30; i++){
+			orderArray[i] = array[i % array.length];
+		}
+		
+		String order = (new BigInteger(orderArray)).toString(8);
 		// 0 1 2 3 4 5 6 7
 		// v - x * + / ^ !
 		long factor = 1000;
+		long steps = 5;
+		if(array.length > 20000000){
+			steps = 1000;
+		}
 		for (int i = 0; i < array.length; i++) {
 			// System.out.println(order.charAt(count % 8));
-			switch (order.charAt(count % 8)) {
+			switch (order.charAt(count)) {
 			case '0':
 				piece1 = new BigInteger("" + (long) Math.abs((Math.cos(array[i]) * 5000 * factor)));
 				piece2 = new BigInteger("" + (long) Math.abs((Math.sin(array[i]) * 5000 * factor)));
@@ -108,7 +118,9 @@ public class CheckSum {
 				break;
 			}
 
-			count++;
+			count = (count + 1) % 8;
+
+			temp = temp.mod(new BigInteger("1298074214633706835075030044377087"));
 		}
 
 		temp = temp.mod(new BigInteger("1298074214633706835075030044377087"));
@@ -124,11 +136,24 @@ public class CheckSum {
 		BigInteger piece1;
 		BigInteger piece2;
 		BigInteger temp = new BigInteger("0");
-		String order = (new BigInteger(array)).toString(8);
+		byte[] orderArray = new byte[30];
+		
+		for(int i = 0; i < 30; i++){
+			orderArray[i] = array[i % array.length];
+		}
+		
+		String order = (new BigInteger(orderArray)).toString(8);
 		// 0 1 2 3 4 5 6 7
 		// v - x * + / ^ !
 		long factor = 1000;
-		for (int i = 0; i < array.length; i++) {
+		long steps = 5;
+		if(array.length > 2000000){
+			steps = 500;
+		}
+		if(array.length > 2000000){
+			steps = 1000;
+		}
+		for (int i = 0; i < array.length; i += steps) {
 			// System.out.println(order.charAt(count % 8));
 			switch (order.charAt(count % 8)) {
 			case '0':
