@@ -90,13 +90,14 @@ public class ArmorCoder {
 	public byte[] encodeManyChunks(byte[] entireChunk) {
 		// chunkHolder is to keep all encoded data
 		// processedData gets at most 3 bytes for encoding at a time
-		LinkedList<Byte> chunkHolder = new LinkedList<Byte>();
+		ArrayList<Byte> chunkHolder = new ArrayList<Byte>();
 		byte[] processedData = null;
 		int counter = 0;
 
 		// Iterate through entire chunk of byte array
 		int size = entireChunk.length;
 		for(int i = 0; i < entireChunk.length; i++) {
+			
 			System.out.println("Encode: "+i+" / "+size);
 			// Make proccessedData an appropriate size
 			if (counter == 0) {
@@ -133,7 +134,7 @@ public class ArmorCoder {
 	public byte[] decodedManyChunks(byte[] encodedData) {
 		// chunkHolder is to keep all decoded data
 		// processedData will always be of size 4
-		LinkedList<Byte> chunkHolder = new LinkedList<Byte>();
+		ArrayList<Byte> chunkHolder = new ArrayList<Byte>();
 		byte[] processedData = null;
 		int counter = 0;
 
