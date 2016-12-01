@@ -3,6 +3,9 @@ package main;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
+
+import javax.swing.plaf.synth.SynthSpinnerUI;
 
 /**
  * A class that can MIME Base64 encode 1 - 3 bytes of data at a time.
@@ -87,12 +90,14 @@ public class ArmorCoder {
 	public byte[] encodeManyChunks(byte[] entireChunk) {
 		// chunkHolder is to keep all encoded data
 		// processedData gets at most 3 bytes for encoding at a time
-		ArrayList<Byte> chunkHolder = new ArrayList<Byte>();
+		LinkedList<Byte> chunkHolder = new LinkedList<Byte>();
 		byte[] processedData = null;
 		int counter = 0;
 
 		// Iterate through entire chunk of byte array
+		int size = entireChunk.length;
 		for(int i = 0; i < entireChunk.length; i++) {
+			System.out.println("Encode: "+i+" / "+size);
 			// Make proccessedData an appropriate size
 			if (counter == 0) {
 				if ((entireChunk.length - i) >= 3) {
@@ -133,7 +138,9 @@ public class ArmorCoder {
 		int counter = 0;
 
 		// Iterate through entire chunk of encoded byte array
+		int size = encodedData.length;
 		for(int i = 0; i < encodedData.length; i++) {
+			System.out.println("Decode: "+i+" / "+size);
 			// Make proccessedData an appropriate size
 			if (counter == 0) {
 				if ((encodedData.length - i) >= 4) {

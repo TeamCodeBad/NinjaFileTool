@@ -67,6 +67,7 @@ public class XOR {
 		
 		for(int i = 0; i < size; i++){
 			new_message[i] = (byte) (message[i] ^ key[i % key.length]);
+			System.out.println("XOR: "+i+" / "+ size);
 		}
 		
 		//encoding within XOR
